@@ -44,6 +44,7 @@ The initial phase focuses on setting up the environment, connecting to various d
 4. **Customers Data:** Import CSV files from folder
 
 Common prepartion:
+Note: All changes were made whilst in the `Table View` > `Transform Data` 
 - Dropping data sensitive columns
 - Renaming columns
 - Splitting columns
@@ -52,6 +53,8 @@ Common prepartion:
 ## Phase 2: Data Modeling and Analysis
 
 ### Date Table Creation and Time Intelligence
+Note: All changes were made whilst in the `Model View`
+
 - Implemented a continuous Date table using DAX, essential for our time-based analysis.
   - DAX formula for creating Date table covering from the start of the year with the earliest `Orders['Order Date']` to the end of the year with the latest `Orders['Shipping Date']`: 
    ```sh
@@ -92,6 +95,7 @@ Common prepartion:
 ### Star Schema Development
 - Formulated a star-based schema connecting `Products`, `Stores`, `Customers`, `Date`, and `Orders` through one-to-many relationships, streamlining data analysis.
   - Key Relationships: 
+  Note: All changes were made whilst in the `Model View`
       - Products[Product Code] to Orders[Product Code]
       - Stores[Store Code] to Orders[Store Code]
       - Customers[User UUID] to Orders[User UUID]
@@ -135,12 +139,45 @@ Common prepartion:
 
    - `Profit YTD`: Calculate the year-to-date profit.
       ```sh
-      Profit YTD = TOTALYTD(SUMX(Orders, (RELATED(Products[Sale Price]) - RELATED(Products[Cost Price])) * Orders[Product Quantity]), Dates[StartOfYear])
+      Profit YTD = TOTALYTD([Total Profit], Dates[StartOfYear])
       ```
 
    - `Revenue YTD`: Calculate the year-to-date revenue.
       ```sh
-      Revenue YTD = TOTALYTD(SUMX(Orders, Orders[Product Quantity] * RELATED(Products[Sale Price])), Dates[StartOfYear])
+      Revenue YTD = TOTALYTD([Total Revenue], Dates[StartOfYear])
+      ```
+   - `Revenue per Customer`:
+      ```sh
+      Revenue per Customer = [Total Revenue] / [Total Customers]
+      ```
+   - `Top Customer`:
+      ```sh
+      Top Customer = MAXX(
+         TOPN(1, ALL(Customers), [Total Revenue]),
+         Customers[Full Name]
+      )
+      ```
+
+   - `Top Customer Total Orders`:
+      ```sh
+      Top Customer Total Orders = CALCULATE(
+         [Total Orders],
+         FILTER(
+            ALL(Customers),
+            Customers[Full Name] = [Top Customer]
+         )
+      )
+      ```
+
+   - `Top Customer Total Revenue`:
+      ```sh
+      Top Customer Total Revenue = CALCULATE(
+         [Total Revenue],
+         FILTER(
+            ALL(Customers),
+            Customers[Full Name] = [Top Customer]
+         )
+      )
       ```
 
 #### Analytical Hierarchies & Data Model Enhancement
@@ -169,6 +206,47 @@ Common prepartion:
       - Country Region : State or Province
 
 This phase underlines a pivotal advancement in crafting a dynamic business intelligence solution. It lays down a robust foundation for insightful analytics, paving the way for the next stages of visual enhancement and data optimization.
+
+
+Renaming VIsuals (Card data):
+Report View > Build a visual > Fields > Right Click (Rename Visual)
+
+
+Line Chart - Forecasts
+Power BI allows you to forecast future data points based on historical data, offering insights into potential future trends.
+
+Activate Forecast: With the line chart selected, navigate to the Analytics pane and click on the + Add button next to Forecast
+
+Adjust Forecast Settings: The following settings can be defined for the forecast:
+
+Units: The units of the time domain of the forecast. You can choose any absolute time value (eg. months or seconds), or choose "points" to have it reflect the current timebase of the chart.
+Forecast Length: The number of the specified units over which the forecast should be made
+Seasonality: The value of any periodicity in the data. For example if you choose months as units, and expect periodicity over the course of a year, you can set this value to 12. If left on the default value of Auto, it will attempt to estimate the periodicity.
+Confidence Interval: The probability that the result falls within the forecast area. Generally, the higher the confidence interval, the broader the forecast area, as it accounts for more potential variability and uncertainty in the data. This means that with a higher confidence interval, there's a greater likelihood that the actual outcome will fall within the predicted range, but the range itself will be wider.
+
+Table TopnN customers
+TopN Filter
+Taking the bar chart in the previous figure, let's say we want to change it to only display the top 3 product categories by revenue.
+
+Select the Visual: Click on the bar chart you want to filter
+Open the Filter Pane: Navigate to the Filter pane on the right
+Apply TopN Filter:
+From the Data pane, we drag the Product[Category] field into the Filters on this visual section of the filter pane
+Click on Filter type dropdown
+Choose the TopN filter option
+We then specify the number 3 to filter the top 3 categories, and then drag the value we want to rank the categories by (in this case our Total Revenue measure ), inbto the By Value field
+
+Conditional format for bars:
+ Report View > Build a Visual > Column NAme > Right Click > Condigitonal Formating > Data bars
+
+3 CArds for top customers:
+Dax formual
+
+Slicer
+Slicer > Field  (Year) 
+Format > Slicer Settings > Select (Between)
+
+
 
 ## Getting Started
 To work on this project, you'll need Microsoft Power BI Desktop installed on your computer. Clone this repository to get started with the pre-configured Power BI template and the sample datasets.
