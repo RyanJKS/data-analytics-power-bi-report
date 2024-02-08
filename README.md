@@ -5,6 +5,10 @@ This project aims to elevate the business intelligence practices of a medium-siz
 
 <!--Include GIF to show how report works-->
 
+
+<!--Image of all the report pages in 1 image (paint)-->
+
+
 ### Objectives
 - **Data Consolidation**: Extract and transform data from multiple sources to create a unified dataset.
 - **Data Modeling**: Implement a robust star-schema data model to facilitate insightful analysis.
@@ -53,7 +57,7 @@ The following transformation were made in order to ensure data integrity and con
 
 ### Introduction to Date Table and Time Intelligence
 
-In our dataset, the absence of a dedicated Date table limits our ability to leverage Power BI's time intelligence capabilities fully. A continuous Date table, spanning the entire timeframe of our data, is crucial for enabling these functions. The Date table is fundamental for time-based analysis, allowing us to perform operations like year-over-year comparisons, calculating running totals, and more. The importance of having a Date table formatted as a `date` data type lies in its necessity for time intelligence calculations, which require a continuous date range to function correctly.
+In our dataset, the absence of a dedicated Date table limits our ability to leverage Power BI's time intelligence capabilities fully. A continuous Date table, spanning the entire timeframe of our data, is crucial for enabling these functions. The Date table is fundamental for time-based analysis, allowing us to perform operations like year-over-year comparisons, calculating running totals, and more. 
 
 #### Creating a Continuous Date Table
 To address this, we've implemented a continuous Date table using DAX, covering from the earliest `Order Date` to the latest `Shipping Date`. This enables a broad range of time intelligence functions in Power BI.
@@ -63,8 +67,8 @@ To address this, we've implemented a continuous Date table using DAX, covering f
 **Enriching the Date Table for Comprehensive Analysis**
 The Date table has been enriched with several columns to support comprehensive time intelligence markers.
 
-<details>
-  <summary>DAX Queries for Additional Date Table Columns</summary>
+<!-- <details>
+  <summary>DAX Queries for Date Table Columns</summary> -->
 
    - **Day of Week**
       ```sh
@@ -93,7 +97,7 @@ The Date table has been enriched with several columns to support comprehensive t
       StartOfMonth = STARTOFMONTH(Dates[Date])
       StartOfWeek = Dates[Date] - WEEKDAY(Dates[Date],2) + 1
       ```
-</details>
+<!-- </details> -->
 
 ### Star Schema Development
 The adoption of a star schema in this project is strategic, enhancing our data model's analytical capabilities. This schema simplifies complex data relationships, making it easier to perform queries and generate insightful analyses and visualizations. By centralizing the data around a single fact table (Orders) and connecting it to related dimension tables (Products, Stores, Customers, Dates), we can efficiently query the model and produce meaningful reports.
@@ -110,7 +114,7 @@ The adoption of a star schema in this project is strategic, enhancing our data m
 > Note: All relationships were established in the `Model View` by linking primary and foreign keys between the dimension tables and the fact table.
 
 
-## Phase 3: DAX Mesaures and Analysis
+## Phase 3: DAX Measures and Analysis
 
 ### Establishing a Measures Table
 Introducing a dedicated Measures Table has significantly enhanced the manageability and clarity of our data model. This centralized table, constructed using DAX and aggregating values from other tables, is essential for efficient data analysis within Power BI.
@@ -129,8 +133,8 @@ We have developed a robust set of DAX measures that are foundational for our rep
 - **Profit YTD & Revenue YTD**: Analyzes profitability and revenue over the current fiscal year.
 - **Advanced Measures**: Features like **Revenue per Customer**, **Top Customer Analysis**, and **Quarterly Targets** elevate the project's analytical depth.
 
-<details>
-  <summary>DAX Queries Measures</summary>
+<!-- <details>
+  <summary>DAX Queries Measures</summary> -->
 
    - **Total Orders**: 
       ```sh
@@ -193,18 +197,10 @@ We have developed a robust set of DAX measures that are foundational for our rep
          )
       )
       ```
-   **KPI**: Mostly be used on Executive Summary page of report
-   - `Previous Quarter Orders, Profit and Revenue`: In this measure, DATEADD(Dates[Date], -1, QUARTER) moves the current date context back by one quarter. Then TOTALQTD computes the quarter-to-date total within this shifted context. Essentially, this measure is attempting to calculate the revenue from the start of the previous quarter to the date equivalent to today's date but in the previous quarter. `PREVIOUSQUARTER()` causes an issue because there the current date is not available in the Dates table which is why we have to manually shift the date using DATEADD. The TOTALQTD function with DATEADD could be calculating a different set of data than PREVIOUSQUARTER due to how dates are handled in your model. TOTALQTD is designed to work with complete quarters, but when combined with DATEADD, it may be looking at an incomplete set of dates.
+   **KPI**:  Used on [Executive Summary Page](#executive-summary-page) of report
+   - **Previous Quarter Orders, Profit and Revenue**:
 
-   The PREVIOUSQUARTER function expects a complete date table that includes dates up to the current date. If the Dates table ends in June 2023 and you're attempting to calculate values in February 2024, the PREVIOUSQUARTER function will not work because it cannot find the context of dates for the previous quarter in 2024. This results in a blank value because there is no data for it to calculate.
-
-   On the other hand, the DATEADD function with TOTALQTD is more flexible because it shifts the context back by one quarter from the latest available date in your Dates table. If the latest date is in June 2023, DATEADD is able to calculate the total for what would have been the "previous quarter" from that point in time.
-   
       ```sh
-      Previous Quarter Orders = CALCULATE([Total Orders], PREVIOUSQUARTER(Dates[Date]))
-      Previous Quarter Revenue = CALCULATE([Total Revenue], PREVIOUSQUARTER(Dates[Date]))
-      Previous Quarter Profit = CALCULATE([Total Profit], PREVIOUSQUARTER(Dates[Date]))
-
       Previous Quarter Orders = CALCULATE(
          TOTALQTD([Total Orders], DATEADD(Dates[Date], -1, QUARTER))
       )
@@ -212,90 +208,130 @@ We have developed a robust set of DAX measures that are foundational for our rep
       Previous Quarter Revenue = CALCULATE(
          TOTALQTD([Total Revenue], DATEADD(Dates[Date], -1, QUARTER))
       )
+
       Previous Quarter Revenue = CALCULATE(
          TOTALQTD([Total Revenue], DATEADD(Dates[Date], -1, QUARTER))
       )
       ```
-      > Note: This is why the PREVIOUSQUARTER() method does not work in this scenario.
+      > Note: The calculation for previous quarter involves shifting the date context back by one quarter using `DATEADD` and then calculating the quarter-to-date total with `TOTALQTD`. This approach is necessary because `PREVIOUSQUARTER()` cannot find the current date in the Dates table, leading to blank values when data for the previous quarter in 2024 is attempted to be calculated with a table ending in June 2023. `DATEADD` with `TOTALQTD` offers flexibility by working from the latest available date, allowing for calculations even when the Dates table does not cover the current quarter, unlike `PREVIOUSQUARTER` which requires a complete date table up to the current date.
 
-   - `Targets`: Set to 5% Growth compared to the previous quarter
+   - **Targets**: Set to 5% growth compared to the previous quarter
       ```sh
       Target Profit = [Previous Quarter Profit] * 1.05
       Target Revenue = [Previous Quarter Revenue] * 1.05
       Target Orders = [Previous Quarter Orders] * 1.05
       ```
-   **Quartely Targets**: Mostly used in the Customer Detail Page
 
-   - `Total Orders QTD`:
+   **Quartely Targets**: Used on [Customer Detail Page](#customer-detail-page) of report
+
+   - **Total Orders, Profit and Revenue QTD**:
+      ```sh
+      Total Orders QTD = TOTALQTD(
+         [Total Orders],
+         Dates[Date]
+      )
+
+      Total Profit QTD = TOTALQTD(
+         [Total Profit],
+         Dates[Date]
+      )
+
+      Total Revenue QTD = TOTALQTD(
+         [Total Revenue],
+         Dates[Date]
+      )
+      ```
+
+   - **Current Targets**: The CEO stated that they are targeting 10% quarter-on-quarter growth in all three metrics.
+      ```sh
+      Current Target Profit = [Previous Quarter Profit] * 1.1
+      Current Target Revenue = [Previous Quarter Revenue] * 1.1
+      Current Target Orders = [Previous Quarter Orders] * 1.1
+      ```
+
+   **Profit per Order**: Used on [Product Detail Page](#product-detail-page) of report.
    ```sh
-   Total Orders QTD = TOTALQTD(
-      [Total Orders],
-      Dates[Date]
-   )
+   Profit per Order = [Total Profit] / [Total Orders]
    ```
 
-   - `Total Profit QTD`:
-   ```sh
-   Total Profit QTD = TOTALQTD(
-      [Total Profit],
-      Dates[Date]
-   )
-   ```
-
-   - `Total Revenue QTD`:
-   ```sh
-   Total Revenue QTD = TOTALQTD(
-      [Total Revenue],
-      Dates[Date]
-   )
-   ```
-
-   - `Current Targets`: The CEO has told you that they are targeting 10% quarter-on-quarter growth in all three metrics.
-   ```sh
-   Current Target Profit = [Previous Quarter Profit] * 1.1
-   Current Target Revenue = [Previous Quarter Revenue] * 1.1
-   Current Target Orders = [Previous Quarter Orders] * 1.1
-   ```
-   - Milestone 7 given: Mostly used in the STores Drillthorugh page
+   **Selection Cards**: Used on [Stores Drillthrough Page](#stores-drill-through) of report.
    ```sh
    Category Selection = IF(ISFILTERED(Products[Category]), SELECTEDVALUE(Products[Category]), "No Selection")
 
    Country Selection = IF(ISFILTERED(Stores[Country]), SELECTEDVALUE(Stores[Country]), "No Selection")
    ```
 
+   - **Guage**:
+      ```sh
+      Profit YTD Previous Year = CALCULATE(
+         [Profit YTD],
+         SAMEPERIODLASTYEAR(Dates[Date])
+      )
+
+      Revenue YTD Previous Year = CALCULATE(
+         [Revenue YTD],
+         SAMEPERIODLASTYEAR(Dates[Date])
+      )
+      ```
+   - **Profit and Revenue Goal**: Set to be 20%
+      ```sh
+      Profit Goal = [Profit YTD Previous Year] * 1.20
+      Revenue Goal = [Revenue YTD Previous Year] * 1.20
+      ```
+ 
+<!-- </details> -->
+
+Note: All implementations were made whilst in the `Model View`
+
+### Analytical Hierarchies & Data Model Enhancement
+
+This enhancement introduces Date and Geography hierarchies, significantly deepening the analysis capabilities of our reports. By implementing these hierarchies, users can perform granular analysis and filter data more effectively.
+
+#### Date Hierarchy
+The Date Hierarchy enables detailed drill-down in line charts and reports, organized into the following levels:
+- Start of Year
+- Start of Quarter
+- Start of Month
+- Start of Week
+- Date
+
+This structure facilitates in-depth temporal analysis, allowing users to navigate through data from a broad annual overview down to specific dates.
+
+#### Geography Hierarchy
+The Geography Hierarchy enhances data filtering and mapping precision across different geographical levels:
+- World Region
+- Country
+- Country Region
+
+Additionally, we've included calculated columns to improve geographical data analysis:
+- **Country Column**: Maps country codes to full country names in the Stores table, enhancing clarity. The mapping follows this scheme:
+  - GB: United Kingdom
+  - US: United States
+  - DE: Germany
+
    ```sh
-   Profit per Order = [Total Profit] / [Total Orders]
+  Country = SWITCH([Country Code], "GB", "United Kingdom", "US", "United States", "DE", "Germany")
    ```
-</details>
-
-
-Note: All changes were made whilst in the `Model View`
-
-
-#### Analytical Hierarchies & Data Model Enhancement
-- Introduced Date and Geography hierarchies to deepen report analysis capabilities.
-   - **Date Hierarchy:** Facilitates drill-down in reports with levels for Year, Quarter, Month, Week, and Date.
-   - **Geography Hierarchy:** Enhances data filtering by region, country, and province/state. Includes a calculated `Country` column mapping country codes to names and a `Geography` column for accurate mapping.
-   - Create a new calculated column in the Stores table called Country that creates a full country name for each row, based on the Stores[Country Code] column, according to the following scheme:
-   GB : United Kingdom
-   US : United States
-   DE : Germany
-
-   ```sh
-   Country = SWITCH([Country Code], "GB", "United Kingdom", "US", "United States", "DE", "Germany")
-   ```
-   - Create a new calculated column in the Stores table called Geography that creates a full geography name for each row, based on the Stores[Country Region], and Stores[Country] columns, separated by a comma and a space.
-
+- **Geography Column**: Combines country regions and countries into a full geography name for each row, facilitating accurate mapping.
    ```sh
    Geography = CONCATENATE(Stores[Country Region], CONCATENATE(", ", Stores[Country]))
    ```
 
-   - Assigned appropriate data categories for improved geographical analysis and mapping precision.
-  - Instructions for assigning data categories: 
-   - Table view > Column Tools > Data Category > Select Type below.
-      - World Region : Continent
-      - Country : Country
-      - Country Region : State or Province
+- **Data Categories for Geographical Analysis**
+To ensure precise geographical analysis and mapping, assign the following data categories to respective columns:
+   - World Region as Continent
+   - Country as Country
+   - Country Region as State or Province
+
+These assignments are critical for leveraging BI tools' built-in mapping capabilities, ensuring that our geographical data is represented as accurately as possible.
+
+#### Maximizing Impact
+
+The introduction of Date and Geography hierarchies, along with carefully crafted calculated columns, significantly enhances the analytical capabilities of your data model. These enhancements facilitate:
+- **Deeper Insights:** By drilling down into specific time frames and geographical locations, users can uncover insights that were previously difficult to access.
+- **Improved Decision Making:** With more granular data at their fingertips, decision-makers can craft strategies that are better informed and more precisely targeted.
+- **Enhanced Data Visualization:** Accurate mapping and temporal analysis lead to clearer, more impactful visualizations, making it easier to communicate findings across the organization.
+
 
 This phase underlines a pivotal advancement in crafting a dynamic business intelligence solution. It lays down a robust foundation for insightful analytics, paving the way for the next stages of visual enhancement and data optimization.
 
@@ -387,9 +423,9 @@ Format > Slicer Settings > Select (Between)
 
 
 **Cross Filtering and Highlighting**:
-- `Top 20 Customers table` should not filter any of the other visuals 
-- `Total Customers by Product Donut Chart` should not affect the `Customers Line Graph` 
-- `Total Customers by Country Donut chart` should cross-filter `Total Customers by Product Donut Chart`
+- `Top 20 Customers table` does not filter any of the other visuals 
+- `Total Customers by Product Donut Chart` does not affect the `Customers Line Graph` 
+- `Total Customers by Country Donut chart` does cross-filter `Total Customers by Product Donut Chart`
 
 ### Product Detail Page
 
@@ -425,8 +461,8 @@ Format > Slicer Settings > Select (Between)
    - Legend should be Products[Category]
 
 **Cross Filtering and Highlighting**:
-- `Orders vs. Profitability Scatter Graph` should not affect any other visuals 
-- `Top 10 Products Table` should not affect any other visuals
+- `Orders vs. Profitability Scatter Graph` does not affect any other visuals 
+- `Top 10 Products Table` does not affect any other visuals
 
 ### Stores Map
 
@@ -460,27 +496,6 @@ Assign your Geography hierarchy to the Location field, and ProfitYTD to the Bubb
    -  Profit YTD and Revenue YTD: You should have already created this earlier in the project
    -  Profit Goal and Revenue Goal, which should be a 20% increase on the previous year's year-to-date profit or revenue at the current point in the year
 
-- DAX
-   ```sh
-   Profit YTD Previous Year = 
-   CALCULATE(
-      [Profit YTD],
-      SAMEPERIODLASTYEAR(Dates[Date])
-   )
-
-   Revenue YTD Previous Year = 
-   CALCULATE(
-      [Revenue YTD],
-      SAMEPERIODLASTYEAR(Dates[Date])
-   )
-
-   ```
-
-   ```sh
-   Profit Goal = [Profit YTD Previous Year] * 1.20
-   Revenue Goal = [Revenue YTD Previous Year] * 1.20
-   ```
-
 **Cross Filtering and Highlighting**:
 - Explain the functionality that allows users to navigate from the Stores Map to this detailed view seamlessly. Highlight how data selected here can offer insights into specific customer segments or product performances tied to the store's location.
 
@@ -506,6 +521,15 @@ Each page of the report is interconnected through Power BI's robust cross-filter
 ### Navbar
 
 Creating an intuitive navigation system within your Power BI report enhances user experience by providing easy access to various report sections and interactive elements. This guide outlines the final steps to add navigation buttons, implement slicers for interactive filtering, and ensure your Navbar is both functional and aesthetically pleasing, including dynamic on-hover effects for better user interaction.
+
+<!-- Insert GIF on how navbar works -->
+
+![Report Pages](assets/misc/report-pages.PNG)
+
+To have an indepth view on how this navbar was created, click on the drop down list.
+
+<!-- <details>
+  <summary>Navbar Setup</summary> -->
 
 #### Adding Navigation Buttons and Implementing On-Hover Effects
 
@@ -553,6 +577,8 @@ Creating an intuitive navigation system within your Power BI report enhances use
    - Group all navigation buttons together for a unified look. Then, replicate this Navbar setup across all report pages to maintain consistent navigation throughout your Power BI report.
 
 By meticulously following these steps, you'll craft a Power BI report that not only delivers insightful analytics but also offers an engaging and interactive user experience, highlighted by a dynamic Navbar that responds to user interactions.
+
+<!-- </details> -->
 
 
 ## Getting Started
