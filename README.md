@@ -340,129 +340,166 @@ This phase underlines a pivotal advancement in crafting a dynamic business intel
 
 This section delves into the specifics of each page within our Power BI report. Each page is meticulously designed to cater to various analytical needs, from high-level executive summaries to detailed customer insights. For every report page, we provide an overview, visual setup explanations, and insights into the cross-filtering and highlighting features that interconnect the data visualizations, enhancing the report's interactivity and analytical depth.
 
+
 ### Executive Summary Page
 
-#### Visual Overview
+The Executive Summary page is the cornerstone of the Power BI report, offering a high-level view of the company's overall performance. It is designed to present key metrics succinctly, enabling C-suite executives to quickly glean insights and assess outcomes against targets.
+
+#### Overview
+
 ![Executive Summary](path/to/executive_summary_image.png)
 
-**Setup and Purpose**: The Executive Summary page is crafted to provide a snapshot of the company's overall performance. It includes key performance indicators (KPIs), trend analyses, and summary charts to give executives a quick, yet comprehensive view of business health.
+<!-- #### Image/GIF Suggestions:
+- Cards setup: An image or GIF showing the process of arranging card visuals for key financial metrics.
+- Line graph evolution: A GIF demonstrating how to modify a line graph from tracking customer details to showcasing Total Revenue over time.
+- KPI progression: Visuals highlighting the steps of setting up KPIs for quarterly financial targets. -->
 
-- Cards:
-Format > Callout Value pane to ensure no more than 2 decimal places in the case of the revenue and profit cards, and only 1 decimal place in the case of the Total Orders measure
+#### Graphs
 
-- KPI Visuals:
+Each visual element on the page is carefully constructed using MEASURES data to ensure accuracy and relevance:
 
-KPI Graph > 
-The Value field should be Total Revenue
-The Trend Axis should be Start of Quarter
-The Target should be Target Revenue
+- **Card Visuals**: Highlight the company's Total Revenue, Total Profit, and Total Orders, with formatting adjusted to present data concisely.
+- **Revenue Line Chart**: Displays revenue trends over time, offering an interactive view of financial performance across different periods.
+- **Donut Charts**: Illustrate revenue distribution by country and store type, providing a geographical and categorical breakdown of earnings.
+- **Bar Chart**: Shows the number of orders by product category, revealing product performance and customer preferences.
+- **KPI Cards**: Reflect quarterly targets and achievements in revenue, orders, and profit, signifying progress towards strategic goals.
 
-In the Format pane, set the Trend Axis to On, expand the associated tab, and set the values as follows:
-
-
-Direction : High is Good
-Bad Colour : red
-Transparency : 15%
-
-- Table:
-Top 10 products that racks more revfenue.
-TopN filter on description column with total revenue as value.
-
-**Cross Filtering and Highlighting**: 
-- `Product Category Bar Chart` and `Top 10 Products Table` should not filter the `Card` visuals or `KPIs`
+#### Cross Filtering and Highlighting Adjustments
+   - `Product Category Bar Chart` and `Top 10 Products Table` does not filter the `Card` visuals or `KPIs`
 
 > Note: This was achieved by using the `Edit Interactions` view in the `Format` tab of the ribbon.
 
+<!-- <details>
+<summary>### Detailed PowerBI Graph Setup</summary> -->
+
+#### Constructing Card Visuals for Key Metrics
+- **Steps**: Duplicate card visuals from another page and assign MEASURES for Total Revenue, Total Profit, and Total Orders. Adjust decimal places for precision in presentation.
+
+#### Line Chart for Revenue Trends
+- **Customization**: Modify the X axis to display Date Hierarchy levels and set the Y axis to Total Revenue. Position the chart to allow for easy viewing of temporal trends.
+
+#### Donut and Bar Chart Configuration
+- **Process**: Copy similar charts from other pages for efficiency. Adjust filters and axis fields to represent the correct data, ensuring that the visual reflects Total Revenue by Store[Country] and Store[Store Type], and orders by product category.
+
+#### Setting Up KPIs for Quarterly Financials
+- **Creation**: Develop new measures for previous quarter profit, revenue, and orders. Construct KPI visuals that compare current performance against these historical metrics, formatted for clarity and immediate comprehension.
+- In the Format pane, set the Trend Axis to On, expand the associated tab, and set the values as follows:
+   - Direction : High is Good
+   - Bad Colour : Red
+   - Transparency : 15%
+
+#### Top 10 Products Table
+- **Filtering**: Apply a TopN filter to the description column using Total Revenue as the value field, showcasing the products driving the most revenue.
+
+<!-- </details> -->
+
 ### Customer Detail Page
 
-#### Visual Overview
-![Customer Detail](path/to/customer_detail_image.png)
+This page focuses on analyzing customer behavior and segmentation. It includes detailed metrics on customer value, purchase patterns, and segmentation analyses to inform targeted marketing strategies.
 
-**Setup and Purpose**: This page focuses on analyzing customer behavior and segmentation. It includes detailed metrics on customer value, purchase patterns, and segmentation analyses to inform targeted marketing strategies.
+#### Overview
+The page is segmented into various visuals including card visuals for distinct metrics, line charts for temporal analysis, detailed tables for top customers, and charts for demographic segmentation. Each element is crafted to provide insights into customer behavior and value.
 
-- Renaming VIsuals (Card data):
-Report View > Build a visual > Fields > Right Click (Rename Visual)
+![Customer Detail Overview](path/to/customer_detail_overview.png)
 
-- Line Chart - Forecasts
-Power BI allows you to forecast future data points based on historical data, offering insights into potential future trends.
+<!-- #### Image/GIF Suggestions:
+- Cards setup: Show an image or GIF of setting up card visuals for total distinct customers and revenue per customer.
+- Line chart setup: A GIF could illustrate the process of adding a line chart for weekly distinct customers, including drilling down capabilities and forecast addition.
+- Table for top customers: An image showcasing the table layout with conditional formatting applied to the revenue column. -->
 
-Activate Forecast: With the line chart selected, navigate to the Analytics pane and click on the + Add button next to Forecast
+#### Graphs
 
-Adjust Forecast Settings: The following settings can be defined for the forecast:
+Each visual on the Customer Detail Page leverages calculated MEASURES to present comprehensive data on customer interactions:
 
-Units: The units of the time domain of the forecast. You can choose any absolute time value (eg. months or seconds), or choose "points" to have it reflect the current timebase of the chart.
+1. **Card Visuals** display key metrics like total distinct customers and revenue per customer, emphasizing customer base size and value.
+   
+2. **Line Chart** offers a timeline view of customer engagement, using MEASURES to track weekly distinct customer trends and forecast future patterns. There is also a **Drilldown** feature that allow users to go to Month level.
 
-Forecast Length: The number of the specified units over which the forecast should be made
+3. **Donut and Bar Charts** segment customers by country and product category, respectively, providing a demographic and interest-based breakdown.
 
-Seasonality: The value of any periodicity in the data. For example if you choose months as units, and expect periodicity over the course of a year, you can set this value to 12. If left on the default value of Auto, it will attempt to estimate the periodicity.
+4. **Customer Table** ranks the top 20 customers by revenue.
 
-Confidence Interval: The probability that the result falls within the forecast area. Generally, the higher the confidence interval, the broader the forecast area, as it accounts for more potential variability and uncertainty in the data. This means that with a higher confidence interval, there's a greater likelihood that the actual outcome will fall within the predicted range, but the range itself will be wider.
+5. **Top Customer Cards** highlight the highest revenue-generating customer, focusing on their order frequency and total contribution.
 
-- Table TopnN customers
-TopN Filter
-Taking the bar chart in the previous figure, let's say we want to change it to only display the top 3 product categories by revenue.
+#### Cross Filtering and Highlighting Adjustments
+   - `Top 20 Customers table` does not filter any of the other visuals 
+   - `Total Customers by Product Donut Chart` does not affect the `Customers Line Graph` 
+   - `Total Customers by Country Donut Chart` does cross-filter `Total Customers by Product Donut Chart`
 
+<!-- <details>
+<summary>### Detailed Graph Setup in PowerBI</summary> -->
 
-Select the Visual: Click on the bar chart you want to filter
-Open the Filter Pane: Navigate to the Filter pane on the right
-Apply TopN Filter:
-From the Data pane, we drag the Product[Category] field into the Filters on this visual section of the filter pane
-Click on Filter type dropdown
-Choose the TopN filter option
-We then specify the number 3 to filter the top 3 categories, and then drag the value we want to rank the categories by (in this case our Total Revenue measure ), inbto the By Value field
+#### Line Chart with Forecasts
+- **Activation**: With the line chart selected, access the `Analytics` pane, add a forecast to predict future customer engagement.
+- **Configuration**: 
+   - Add a trend line, and a forecast for the next 10 periods with a 95% confidence interval. 
+   - Use the `Date Hierarchy` created previously for the X axis which allow users to `drill down` to the month level, but not to weeks or individual dates.
 
-Conditional format for bars:
- Report View > Build a Visual > Column NAme > Right Click > Condigitonal Formating > Data bars
+#### Top N Customers Table
+- **Filter Application**: Use the TopN filter to display only the highest revenue-generating customers, ensuring the data presented reflects significant contributors to business success.
 
-- 3 CArds for top customers:
-Dax formuala: Top Customer ... to be used
+#### Customer Table Conditional Formatting
+- **Implementation**: Apply data bars for visual enhancement of revenue values within the customer table, making it easier to compare contributions at a glance.
+- Report View > Build a Visual > Column Name > Right Click > Condigitonal Formating > Data bars
 
-- Slicer
-Slicer > Field  (Year) 
-Format > Slicer Settings > Select (Between)
+#### Slicer Configuration
+- **Date Slicer**: Add a date slicer for period-specific data filtering, enhancing report dynamism and user-driven analysis.
+- Slicer > Field  (Year) 
+- Format > Slicer Settings > Select (Between)
 
-
-**Cross Filtering and Highlighting**:
-- `Top 20 Customers table` does not filter any of the other visuals 
-- `Total Customers by Product Donut Chart` does not affect the `Customers Line Graph` 
-- `Total Customers by Country Donut chart` does cross-filter `Total Customers by Product Donut Chart`
+<!-- </details> -->
 
 ### Product Detail Page
 
-#### Visual Overview
+The Product Detail Page provides an in-depth look at product performance within the inventory, combining data from all products and regions. It's designed to help the product team identify top-performing products and areas for improvement, supported by the capability to filter by product and region.
+
+Aimed at understanding product performance, this page breaks down sales by product categories, performance against targets, and inventory levels, offering insights into product strategy and optimization.
+
 ![Product Detail](path/to/product_detail_image.png)
 
-**Setup and Purpose**: Aimed at understanding product performance, this page breaks down sales by product categories, performance against targets, and inventory levels, offering insights into product strategy and optimization.
+#### Overview
+This page is equipped with a variety of visuals, including gauges, area charts, and scatter graphs, each leveraging the power of MEASURES data to offer detailed insights. Here, we also incorporate cross-filtering capabilities and slicer states to refine data analysis further.
 
-- Guage Format :
+<!-- #### Image/GIF Suggestions:
+- Gauges setup: An image or GIF to demonstrate the setup of gauges displaying current-quarter performance.
+- Area chart progression: A GIF illustrating the creation of an area chart showing revenue performance over time.
+- Scatter graph creation: Visual steps showing how to set up a scatter graph to analyze the profitability and sales quantity of each product. -->
+
+#### Graphs
+
+Each graph on this page is a visual representation of calculated MEASURES, providing a quantitative analysis of product performance:
+
+- **Gauge Visuals**: Reflect the current-quarter performance of Orders, Revenue, and Profit against the CEO's 10% quarter-on-quarter growth target.
+- **Area Chart**: Displays the relative revenue performance of each product category over time, highlighting trends and seasonal impacts on sales.
+- **Top 10 Products Table**: Lists products by revenue in the selected context, offering a leaderboard of top-performing items.
+- **Scatter Graph**: Combines quantity ordered against profit per item, helping identify products that strike the best balance between popularity and profitability.
+
+#### Cross Filtering and Highlighting Adjustments
+   - `Orders vs. Profitability Scatter Graph` does not affect any other visuals 
+   - `Top 10 Products Table` does not affect any other visuals
+
+<!-- <details>
+<summary>### Detailed PowerBI Graph Setup</summary> -->
+
+#### Gauge Visuals for Quarterly Metrics
+- **Steps**: Add a set of three gauges, showing the current-quarter performance of Orders, Revenue and Profit against a quarterly target. The CEO has told you that they are targeting 10% quarter-on-quarter growth in all three metrics.
+- **Conditional Formatting**: Apply conditional formatting to the callout value (the number in the middle of the gauge), so that it shows as red if the target is not yet met, and black otherwise.
    - Report View > Format > Callout value > Values > Fx > set conditional format
 
-- Cards:
-   - If the Products[Category] column is filtered to a single value, Category Selection returns that specific category.
-   - If Products[Category] is not filtered or is filtered to multiple values, Category Selection returns "No Selection".
-   - The same logic applies to Country Selection for the Stores[Country] column.
-   - These measures can be used in visuals or cards to display the currently selected category or country, or to indicate if no specific selection has been made. They are helpful for providing interactive feedback to report users about the current filtering context.
+#### Cards to Display Filter State
+- **Configuration**: Add card visuals to display the filter state of the slicers, from the Navbar, using DAX measures `Category Selection` and `Country Selection` that dynamically reflect the selected category or country. They are helpful for providing interactive feedback to report users about the current filtering context.
 
-- Area Chart: Shows how the different product categories are performing in terms of revenue over time.
+#### Area Chart for Revenue Over Time
+- **Visualization**: Introduce an area chart on the page to visualize revenue trends, configuring the X axis with `Dates[Start of Quarter]` and the Y axis with `Total Revenue`.
 
-   - X axis should be Dates[Start of Quarter]
-   - Y axis values should be Total Revenue
-   - Legend should be Products[Category]
-   
-- Scatter Graph
-   - Create CALCULATED COLUMN in products table.
-      ```sh
-      Profit per Item = [Sale Price] - [Cost Price]
-      ```
-
+#### Scatter Graph for Product Analysis
+- **Setup**: Arrange a scatter chart that uses `Profit per Item` to depict the relationship between the profitability and sales volume of products.
    - Values should be Products[Description]
    - X-Axis should be Products[Profit per Item]
    - Y-Axis should be Orders[Total Quantity]
    - Legend should be Products[Category]
 
-**Cross Filtering and Highlighting**:
-- `Orders vs. Profitability Scatter Graph` does not affect any other visuals 
-- `Top 10 Products Table` does not affect any other visuals
+<!-- </details> -->
 
 ### Stores Map
 
