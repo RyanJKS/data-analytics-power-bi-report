@@ -1,23 +1,37 @@
-# Quarterly Business Intelligence Report with Power BI
+# Business Intelligence Report with Power BI
 
 ## Project Overview
-This project aims to elevate the business intelligence practices of a medium-sized international retailer by transforming their extensive sales data into actionable insights. Leveraging Microsoft Power BI, we design a comprehensive quarterly report that aids in informed decision-making at various levels of the organization.
 
-<!--Include GIF to show how report works-->
+In this project, we harness the capabilities of Microsoft Power BI to synthesize large volumes of sales data from a medium-sized international retailer into a strategic asset. The goal is to produce a comprehensive quarterly business intelligence report that provides clarity and supports strategic decision-making across the organization.
 
 
-<!--Image of all the report pages in 1 image (paint)-->
+![Overall Report Flow](path/to/report_flow.gif)
 
+### Comprehensive Dashboard in a Glance
+
+![Dashboard Overview](path/to/dashboard_overview.png)
 
 ### Objectives
-- **Data Consolidation**: Extract and transform data from multiple sources to create a unified dataset.
-- **Data Modeling**: Implement a robust star-schema data model to facilitate insightful analysis.
-- **Report Design**: Develop a multi-page Power BI report that includes:
-  - A high-level business summary for C-suite executives.
-  - Customer segmentation by sales region to identify high-value customers.
-  - Analysis of top-performing products by category against sales targets.
-  - A map visual highlighting retail outlet performance across territories.
 
+The project focuses on four main objectives to optimize business intelligence practices:
+
+- **Data Consolidation**:
+  - Extract and integrate data from varied sources to create a comprehensive dataset for analysis.
+
+- **Data Modeling**:
+  - Develop a robust star-schema data model to streamline insightful analysis and enhance data querying efficiency.
+
+- **Report Design**:
+  - Craft a detailed multi-page Power BI report tailored for different stakeholders, featuring:
+    - An **Executive Summary** page that distills key metrics into an easily digestible format for C-suite executives, providing a snapshot of the company's overall health.
+    - **Customer Segmentation Analysis** that uses sales region data to pinpoint and profile high-value customer segments.
+    - A **Product Performance Review** that breaks down top-performing products by category and measures them against predefined sales targets.
+    - An **Interactive Stores Map** which employs geographic data visualizations to spotlight the performance metrics of retail outlets, fostering a competitive and responsive retail strategy.
+
+- **SQL Data Extraction**:
+  - Expand the toolkit to include SQL queries for data analysis, enabling key data extraction without relying solely on specialized visualization tools, ensuring insights are accessible to a broader audience.
+
+Each element of the report is designed not just to present data, but to tell a story that guides the executive team towards understanding patterns, trends, and opportunities in the market landscape.
 
 ## Phase 1: Data Loading and Preparation
 
@@ -197,7 +211,7 @@ We have developed a robust set of DAX measures that are foundational for our rep
          )
       )
       ```
-   **KPI**:  Used on [Executive Summary Page](#executive-summary-page) of report
+   **KPI**:  Used on [Executive Summary Page](#executive-summary) of report
    - **Previous Quarter Orders, Profit and Revenue**:
 
       ```sh
@@ -222,7 +236,7 @@ We have developed a robust set of DAX measures that are foundational for our rep
       Target Orders = [Previous Quarter Orders] * 1.05
       ```
 
-   **Quartely Targets**: Used on [Customer Detail Page](#customer-detail-page) of report
+   **Quartely Targets**: Used on [Customer Detail Page](#customer-detail) of report
 
    - **Total Orders, Profit and Revenue QTD**:
       ```sh
@@ -249,7 +263,7 @@ We have developed a robust set of DAX measures that are foundational for our rep
       Current Target Orders = [Previous Quarter Orders] * 1.1
       ```
 
-   **Profit per Order**: Used on [Product Detail Page](#product-detail-page) of report.
+   **Profit per Order**: Used on [Product Detail Page](#product-detail) of report.
    ```sh
    Profit per Order = [Total Profit] / [Total Orders]
    ```
@@ -341,7 +355,7 @@ This phase underlines a pivotal advancement in crafting a dynamic business intel
 This section delves into the specifics of each page within our Power BI report. Each page is meticulously designed to cater to various analytical needs, from high-level executive summaries to detailed customer insights. For every report page, we provide an overview, visual setup explanations, and insights into the cross-filtering and highlighting features that interconnect the data visualizations, enhancing the report's interactivity and analytical depth.
 
 
-### Executive Summary Page
+### Executive Summary
 
 The Executive Summary page is the cornerstone of the Power BI report, offering a high-level view of the company's overall performance. It is designed to present key metrics succinctly, enabling C-suite executives to quickly glean insights and assess outcomes against targets.
 
@@ -449,7 +463,7 @@ Each visual on the Customer Detail Page leverages calculated MEASURES to present
 
 <!-- </details> -->
 
-### Product Detail Page
+### Product Detail
 
 The Product Detail Page provides an in-depth look at product performance within the inventory, combining data from all products and regions. It's designed to help the product team identify top-performing products and areas for improvement, supported by the capability to filter by product and region.
 
@@ -501,55 +515,77 @@ Each graph on this page is a visual representation of calculated MEASURES, provi
 
 <!-- </details> -->
 
-### Stores Map
+### Stores Map: Regional Performance at a Glance
 
-#### Visual Overview
+#### Overview
+The Stores Map is a pivotal tool for regional managers, providing a comprehensive view of store performances across different regions. It is an essential component for strategic decision-making, offering insights into sales, customer activity, and target achievement.
+
 ![Stores Map](path/to/stores_map_image.png)
 
-**Setup and Purpose**: The Stores Map provides a geographical view of retail performance, including sales, customer footfall, and regional market penetration, essential for strategic planning and regional analysis.
-
-- Settings:
-Format Pane > Category labels on
-Format Pane > Map Settings > Controls > :
-Auto-Zoom: On
-Zoom buttons: Off
-Lasso button: Off
+#### Graphs
+The map visual takes up a central position on the page, complemented by a slicer for selecting specific countries. This setup provides a clear geographic view of sales, customer activity, and market penetration—crucial for regional managers in charge of strategic planning.
 
 
-Assign your Geography hierarchy to the Location field, and ProfitYTD to the Bubble size field
+<!-- <details>
+<summary>#### Graph Setup</summary> -->
 
-**Cross Filtering and Highlighting**:
-- Discuss how selecting specific regions or stores on the map influences data across the report, particularly in the Stores Drill Through and Product Detail pages, illustrating the geographical impact on sales and product popularity.
+#### Map Visual Configuration
+- **Steps**:
+  - Add a new map visual, customizing its style in the Format pane and ensuring labels are set to 'On'.
+  - Adjust the controls to enhance the user experience, with Auto-Zoom 'On' for ease of navigation.
 
-### Stores Drill Through
+#### Map Configuration
+- **Geography Hierarchy**: Assign the `Geography Hierarchy` to the Location field, linking it with the `ProfitYTD` to reflect store performance.
 
-#### Visual Overview
+#### Slicer Implementation
+- **Slicer Setup**:
+  - Position a slicer above the map to filter by Stores[Country].
+  - Customize the slicer to allow multi-select and include a "Select All" option for comprehensive filtering.
+
+<!-- </details> -->
+
+### Stores Drill Through: In-Depth Store Analysis
+
+#### Overview
+Transitioning from the broad geographic insights, the Stores Drill Through page allows regional managers to drill down into individual store to assess their performance against set targets.
+
 ![Stores Drill Through](path/to/stores_drill_through_image.png)
 
-**Setup and Purpose**: Designed for deep dives into individual store performances, this page offers detailed analytics on sales, customer demographics, and inventory for selected stores from the Stores Map.
+#### Graphs
+This page houses a range of visuals: gauges for Profit and Revenue YTD against quarterly targets, a top products table, and a column chart showing orders by category, all of which provide a detailed breakdown of store operations.
 
-- Create a new page named Stores Drillthrough. Open the format pane and expand the Page information tab. Set the Page type to Drillthrough and set Drill through when to Used as category. Set Drill through from to country region.
-- Guage:
-   -  Profit YTD and Revenue YTD: You should have already created this earlier in the project
-   -  Profit Goal and Revenue Goal, which should be a 20% increase on the previous year's year-to-date profit or revenue at the current point in the year
+<!-- <details>
+<summary>#### Graph Setup</summary> -->
+#### Page Configuration 
+  - Define the page as a Drillthrough page within the Format Pane, setting 'Used as category' for a focused category drill-through, such as 'country region'.
 
-**Cross Filtering and Highlighting**:
-- Explain the functionality that allows users to navigate from the Stores Map to this detailed view seamlessly. Highlight how data selected here can offer insights into specific customer segments or product performances tied to the store's location.
+#### Gauges and Targets
+  - Use the previously created Profit YTD and Revenue YTD measures.
+  - Set new goals for Profit and Revenue, aiming for a 20% year-on-year growth.
 
-### Stores Tooltip
+<!-- </details> -->
 
-#### Visual Overview
-![Stores Tooltip](path/to/stores_tooltip_image.png)
+### Stores Tooltip: Instant Data on Hover
 
-**Setup and Purpose**: The Stores Tooltip enhances the interactive experience by providing quick, contextual insights when hovering over elements in the Stores Map, delivering immediate data snapshots without navigating away from the page.
+#### Overview
+The Stores Tooltip page serves as a dynamic hover detail feature for the Stores Map, instantly presenting key information about each store without requiring page navigation.
 
--  Make sure page is setup as tooltip a
-- Put graph at top left corner of page and make sure the size of cahrt is the same as Canvas
-   Tooltip Size.
-- GIF on how it works
+![Stores Tooltip](path/to/stores_tooltip_image.png) - Maybe use GIF
 
-**Cross Filtering and Highlighting**:
-- Outline how this feature complements the overall navigational flow and data exploration within the report, enriching the user's understanding of store-specific metrics in relation to the broader business landscape.
+#### Graphs
+Customized tooltips appear when hovering over a store on the map, showing a profit gauge or other relevant metrics, allowing for an immediate understanding of store performance.
+
+<!-- <details>
+<summary>#### Graph Setup</summary> -->
+#### Tooltip Page Configuration
+- Set the page type to Tooltip and adjust the size to match the Tooltip canvas size in Power BI settings.
+
+#### Graph Placement
+- Position your visuals in the top left corner, ensuring they fill the canvas to optimize the tooltip's display area.
+
+<!-- </details> -->
+
+From the Stores Map, regional managers can effortlessly transition to the Stores Drill Through page for an in-depth review of individual stores. Similarly, hovering over a store on the map presents a tooltip with immediate profit insights, tying together various aspects of the report into a cohesive analytical experience.
 
 ---
 
@@ -613,38 +649,101 @@ To have an indepth view on how this navbar was created, click on the drop down l
 4. **Grouping and Replication**:
    - Group all navigation buttons together for a unified look. Then, replicate this Navbar setup across all report pages to maintain consistent navigation throughout your Power BI report.
 
-By meticulously following these steps, you'll craft a Power BI report that not only delivers insightful analytics but also offers an engaging and interactive user experience, highlighted by a dynamic Navbar that responds to user interactions.
-
 <!-- </details> -->
 
+This Power BI report that not only delivers insightful analytics but also offers an engaging and interactive user experience, highlighted by a dynamic Navbar that responds to user interactions.
+
+
+## SQL Analysis and Data Sharing
+
+### Overview
+To accommodate clients without direct access to Power BI, this milestone introduces SQL as a crucial tool in the data analysis arsenal. Using SQL, you can extract vital data insights and share them widely, even without visualization platforms.
+
+### Uploading Data to PostgreSQL
+
+The necessary CSV files for database upload are conveniently located in the `datasets/db_query` directory of this repository. Follow these steps to populate your PostgreSQL database:
+
+1. **Accessing the CSV Files**:
+   - Navigate to the `datasets/db_query` directory within the cloned or downloaded repository to find the CSV files prepared for upload.
+
+2. **Database Upload**:
+   - Utilize your preferred PostgreSQL tool (such as pgAdmin or SQLTools in VSCode) to import the CSV files into your `orders-db` database.
+   - Ensure that each CSV file is uploaded to the corresponding table within the database.
+
+### Extracting and Sharing Data
+
+1. **Table and Column Overview**:
+   - Print a list of the database tables and their columns, saving each to a `.csv` file for easy reference.
+
+2. **SQL Queries for Business Questions**:
+   - Use the SQL queries provided to answer specific business questions which is found below.
+   - The initial results were exported to `.csv` files which is also found in the `business_sql_queries` folder.
+
+### SQL Analysis Questions
+
+- Determine the total number of staff across UK stores.
+- Identify which month in 2022 had the highest revenue.
+- Ascertain which German store type achieved the highest revenue in 2022.
+- Create a view displaying store types with corresponding total sales, percentage of total sales, and order counts.
+- Find out which product category was most profitable for the "Wiltshire, UK" region in 2021.
+
+By integrating SQL into our analysis process, we ensure that our insights remain accessible and actionable, reinforcing the project's commitment to comprehensive data-driven decision-making.
 
 ## Getting Started
-To work on this project, you'll need Microsoft Power BI Desktop installed on your computer. Clone this repository to get started with the pre-configured Power BI template and the sample datasets.
 
 ### Prerequisites
+
+Before diving into the project, ensure you have the following:
 - Microsoft Power BI Desktop
 - Basic understanding of Power BI and data modeling concepts
 
 ### Environment Setup for Mac/Linux Users
-**Create an Azure Virtual Machine (VM):**
+
+For those using Mac or Linux, here's how to set up your environment:
+
+**Azure Virtual Machine Creation**:
    - Sign up for a free Azure account.
    - Create a Windows VM with the size D2s_v3. The Azure free trial includes a $200 credit.
    - Connect to the VM using Microsoft Remote Desktop and the Remote Desktop Protocol (RDP).
 
+### Installation and Repository Cloning
 
-### Installation
-1. Install Microsoft Power BI Desktop from the [official website](https://powerbi.microsoft.com/en-us/downloads/).
-2. Clone this repository or download the ZIP file and extract it to your local machine.
-3. Open the `.pbix` file with Power BI Desktop to start exploring the report.
+To begin working with the Power BI template and sample datasets, follow these steps:
 
-## Usage
-The project is structured to guide users through the process of data extraction, transformation, and visualization:
-1. **Load Data**: Import your sales data from the various sources into Power BI.
-2. **Transform Data**: Utilize the Power Query Editor to clean and prepare your data.
-3. **Model Data**: Build the star-schema model to link your data tables effectively.
-4. **Visualize Data**: Create the report pages using Power BI's visualization tools.
+1. **Power BI Desktop Installation**:
+   - Download and install Microsoft Power BI Desktop from the [official website](https://powerbi.microsoft.com/en-us/downloads/).
 
-Refer to the `Documentation` folder for detailed guides on each step.
+2. **Cloning the Repository**:
+   ```sh
+   git clone https://github.com/RyanJKS/data-analytics-power-bi-report.git
+   ```
+
+3. **Opening the Project File**:
+   - Launch Power BI Desktop and open the `.pbix` file from the repository to initiate the report exploration.
+
+## Usage Guidelines
+
+This project is designed to walk you through a structured approach to business intelligence reporting:
+
+1. **Data Loading**:
+   - Begin by importing the sales data from various sources into Power BI for consolidation.
+
+2. **Data Transformation**:
+   - Leverage Power BI's Power Query Editor to cleanse, transform, and prepare your dataset for analysis.
+
+3. **Data Modeling**:
+   - Employ the star-schema approach to construct an efficient data model, ensuring your tables are correctly related.
+
+4. **Data Visualization**:
+   - Utilize Power BI's array of visualization tools to bring your data to life, creating informative and interactive report pages.
+
+5. **Report Pages Navigation**:
+   - Navigate through the report pages such as the Executive Summary, Product Detail, Stores Map, and others to analyze different aspects of business performance.
+
+6. **Advanced Features**:
+   - Explore advanced functionalities like drill-throughs and tooltips for a deeper understanding of specific data points.
+
+Happy analyzing, and we look forward to seeing the insights you'll uncover!
 
 ## Contributing
 We welcome contributions to improve this project. If you have suggestions or improvements, please fork the repository and create a pull request.
