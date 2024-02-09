@@ -7,9 +7,37 @@ In this project, we harness the capabilities of Microsoft Power BI to synthesize
 
 ![Overall Report Flow](path/to/report_flow.gif)
 
-### Comprehensive Dashboard in a Glance
+### Dashboard Overview
 
 ![Dashboard Overview](path/to/dashboard_overview.png)
+
+# Table of Contents
+1. [Project Overview](#project-overview)
+   - [Dashboard Overview](#comprehensive-dashboard-in-a-glance)
+   - [Objectives](#objectives)
+2. [Data Loading and Preparation](#data-loading-and-preparation)
+3. [Data Modeling and Star Schema](#data-modeling-and-star-schema)
+   - [Time Intelligence with Date Table](#introduction-to-date-table-and-time-intelligence)
+   - [Star Schema Relationships](#star-schema-development)
+4. [DAX Measures and Data Analysis](#dax-measures-and-analysis)
+   - [Measures Table Creation](#establishing-a-measures-table)
+   - [In-Depth Reporting with DAX Measures](#comprehensive-dax-measures-for-in-depth-reporting)
+   - [Hierarchies and Data Model Enhancements](#analytical-hierarchies-and-data-model-enhancement)
+5. [Report Pages Deep Dive](#overview-of-report-pages)
+   - [Executive Summary: High-Level Insights](#executive-summary-high-level-insights)
+   - [Customer Detail: Segmentation and Behavior](#customer-detail-segmentation-and-behavior)
+   - [Product Detail: Performance Exploration](#product-detail-performance-exploration)
+   - [Stores Map: Regional Performance at a Glance](#stores-map-regional-performance-at-a-glance)
+   - [Stores Drill Through: In-Depth Store Analysis](#stores-drill-through-in-depth-store-analysis)
+   - [Stores Tooltip: Instant Data on Hover](#stores-tooltip-instant-data-on-hover)
+   - [Navigation Bar: Efficient Report Browsing](#navigation-bar-efficient-report-browsing)
+6. [SQL Data Integration](#sql-analysis-and-data-sharing)
+7. [Getting Started with Power BI](#getting-started)
+8. [Usage Guidelines](#usage-guidelines)
+9. [Contributing to the Project](#contributing)
+10. [License Information](#license)
+11. [Acknowledgments and Credits](#acknowledgments)
+
 
 ### Objectives
 
@@ -33,7 +61,7 @@ The project focuses on four main objectives to optimize business intelligence pr
 
 Each element of the report is designed not just to present data, but to tell a story that guides the executive team towards understanding patterns, trends, and opportunities in the market landscape.
 
-## Phase 1: Data Loading and Preparation
+## Data Loading and Preparation
 
 ### Overview
 The initial phase focuses on setting up the environment, connecting to various data sources, and preparing the dataset for analysis. This includes:
@@ -66,7 +94,7 @@ The following transformation were made in order to ensure data integrity and con
 > Note: All changes were made whilst in the `Table View` > `Transform Data` and by making use of the `Data Preview` features under the `View` tab. This project also assume you have **on-object formatting** enabled on Power BI Desktop app. To enable it, follow these steps: **File > Options and Settings > Options > Preview Features > On-object interaction** and make sure the checkbox is ticked.
 
 
-## Phase 2: Data Modeling
+## Data Modeling and Star Schema
 
 
 ### Introduction to Date Table and Time Intelligence
@@ -128,7 +156,7 @@ The adoption of a star schema in this project is strategic, enhancing our data m
 > Note: All relationships were established in the `Model View` by linking primary and foreign keys between the dimension tables and the fact table.
 
 
-## Phase 3: DAX Measures and Analysis
+## DAX Measures and Analysis
 
 ### Establishing a Measures Table
 Introducing a dedicated Measures Table has significantly enhanced the manageability and clarity of our data model. This centralized table, constructed using DAX and aggregating values from other tables, is essential for efficient data analysis within Power BI.
@@ -295,7 +323,7 @@ We have developed a robust set of DAX measures that are foundational for our rep
  
 <!-- </details> -->
 
-Note: All implementations were made whilst in the `Model View`
+> Note: All implementations were made whilst in the `Model View`
 
 ### Analytical Hierarchies & Data Model Enhancement
 
@@ -350,12 +378,12 @@ The introduction of Date and Geography hierarchies, along with carefully crafted
 This phase underlines a pivotal advancement in crafting a dynamic business intelligence solution. It lays down a robust foundation for insightful analytics, paving the way for the next stages of visual enhancement and data optimization.
 
 
-## Overview of Report Pages
+## Report Pages Deep Dive
 
 This section delves into the specifics of each page within our Power BI report. Each page is meticulously designed to cater to various analytical needs, from high-level executive summaries to detailed customer insights. For every report page, we provide an overview, visual setup explanations, and insights into the cross-filtering and highlighting features that interconnect the data visualizations, enhancing the report's interactivity and analytical depth.
 
 
-### Executive Summary
+### Executive Summary: High-Level Insights
 
 The Executive Summary page is the cornerstone of the Power BI report, offering a high-level view of the company's overall performance. It is designed to present key metrics succinctly, enabling C-suite executives to quickly glean insights and assess outcomes against targets.
 
@@ -407,7 +435,7 @@ Each visual element on the page is carefully constructed using MEASURES data to 
 
 <!-- </details> -->
 
-### Customer Detail Page
+### Customer Detail: Segmentation and Behavior
 
 This page focuses on analyzing customer behavior and segmentation. It includes detailed metrics on customer value, purchase patterns, and segmentation analyses to inform targeted marketing strategies.
 
@@ -463,7 +491,7 @@ Each visual on the Customer Detail Page leverages calculated MEASURES to present
 
 <!-- </details> -->
 
-### Product Detail
+### Product Detail: Performance Exploration
 
 The Product Detail Page provides an in-depth look at product performance within the inventory, combining data from all products and regions. It's designed to help the product team identify top-performing products and areas for improvement, supported by the capability to filter by product and region.
 
@@ -515,7 +543,7 @@ Each graph on this page is a visual representation of calculated MEASURES, provi
 
 <!-- </details> -->
 
-### Stores Map: Regional Performance at a Glance
+### Stores Map: Regional Performance
 
 #### Overview
 The Stores Map is a pivotal tool for regional managers, providing a comprehensive view of store performances across different regions. It is an essential component for strategic decision-making, offering insights into sales, customer activity, and target achievement.
@@ -591,7 +619,7 @@ From the Stores Map, regional managers can effortlessly transition to the Stores
 
 Each page of the report is interconnected through Power BI's robust cross-filtering and highlighting capabilities, ensuring a fluid, intuitive analytical journey across different dimensions of the business data.
 
-### Navbar
+### Navigation Bar: Efficient Report Browsing
 
 Creating an intuitive navigation system within your Power BI report enhances user experience by providing easy access to various report sections and interactive elements. This guide outlines the final steps to add navigation buttons, implement slicers for interactive filtering, and ensure your Navbar is both functional and aesthetically pleasing, including dynamic on-hover effects for better user interaction.
 
