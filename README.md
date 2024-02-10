@@ -4,12 +4,11 @@
 
 In this project, we harness the capabilities of Microsoft Power BI to synthesize large volumes of sales data from a medium-sized international retailer into a strategic asset. The goal is to produce a comprehensive quarterly business intelligence report that provides clarity and supports strategic decision-making across the organization.
 
-
-![Overall Report Flow](path/to/report_flow.gif)
+![Overall Report Flow](/assets/report-pages/full-report-overview.gif)
 
 ### Dashboard Overview
 
-![Dashboard Overview](path/to/dashboard_overview.png)
+![Dashboard Overview](/assets/report-pages/full-report.png)
 
 # Table of Contents
 1. [Project Overview](#project-overview)
@@ -33,11 +32,10 @@ In this project, we harness the capabilities of Microsoft Power BI to synthesize
    - [Navigation Bar: Efficient Report Browsing](#navigation-bar-efficient-report-browsing)
 6. [SQL Data Integration](#sql-analysis-and-data-sharing)
 7. [Getting Started with Power BI](#getting-started)
-8. [Usage Guidelines](#usage-guidelines)
-9. [Contributing to the Project](#contributing)
+8. [Usage](#usage-guidelines)
+9. [Contribution](#contributing)
 10. [License Information](#license)
-11. [Acknowledgments and Credits](#acknowledgments)
-
+11. [Acknowledgments](#acknowledgments)
 
 ### Objectives
 
@@ -385,11 +383,10 @@ This section delves into the specifics of each page within our Power BI report. 
 
 ### Executive Summary: High-Level Insights
 
+#### Overview
 The Executive Summary page is the cornerstone of the Power BI report, offering a high-level view of the company's overall performance. It is designed to present key metrics succinctly, enabling C-suite executives to quickly glean insights and assess outcomes against targets.
 
-#### Overview
-
-![Executive Summary](path/to/executive_summary_image.png)
+![Executive Summary](/assets/report-pages/executive-summary.PNG)
 
 <!-- #### Image/GIF Suggestions:
 - Cards setup: An image or GIF showing the process of arranging card visuals for key financial metrics.
@@ -430,19 +427,23 @@ Each visual element on the page is carefully constructed using MEASURES data to 
    - Bad Colour : Red
    - Transparency : 15%
 
+![KPI's setup](/assets/misc/kpi-format.PNG)
+
 #### Top 10 Products Table
 - **Filtering**: Apply a TopN filter to the description column using Total Revenue as the value field, showcasing the products driving the most revenue.
+
+![TopN Filter](/assets/misc/TopN-filter.PNG)
 
 <!-- </details> -->
 
 ### Customer Detail: Segmentation and Behavior
 
+#### Overview
 This page focuses on analyzing customer behavior and segmentation. It includes detailed metrics on customer value, purchase patterns, and segmentation analyses to inform targeted marketing strategies.
 
-#### Overview
 The page is segmented into various visuals including card visuals for distinct metrics, line charts for temporal analysis, detailed tables for top customers, and charts for demographic segmentation. Each element is crafted to provide insights into customer behavior and value.
 
-![Customer Detail Overview](path/to/customer_detail_overview.png)
+![Customer Detail Overview](/assets/report-pages/customer-detail.PNG)
 
 <!-- #### Image/GIF Suggestions:
 - Cards setup: Show an image or GIF of setting up card visuals for total distinct customers and revenue per customer.
@@ -493,14 +494,16 @@ Each visual on the Customer Detail Page leverages calculated MEASURES to present
 
 ### Product Detail: Performance Exploration
 
+#### Overview
+This page is equipped with a variety of visuals, including gauges, area charts, and scatter graphs, each leveraging the power of MEASURES data to offer detailed insights. Here, we also incorporate cross-filtering capabilities and slicer states to refine data analysis further.
+
 The Product Detail Page provides an in-depth look at product performance within the inventory, combining data from all products and regions. It's designed to help the product team identify top-performing products and areas for improvement, supported by the capability to filter by product and region.
 
 Aimed at understanding product performance, this page breaks down sales by product categories, performance against targets, and inventory levels, offering insights into product strategy and optimization.
 
-![Product Detail](path/to/product_detail_image.png)
+![Product Detail](/assets/report-pages/product-detail.PNG)
+![Product Detail Slicer Panel](/assets/report-pages/product-detail-slicer-panel.PNG)
 
-#### Overview
-This page is equipped with a variety of visuals, including gauges, area charts, and scatter graphs, each leveraging the power of MEASURES data to offer detailed insights. Here, we also incorporate cross-filtering capabilities and slicer states to refine data analysis further.
 
 <!-- #### Image/GIF Suggestions:
 - Gauges setup: An image or GIF to demonstrate the setup of gauges displaying current-quarter performance.
@@ -548,11 +551,10 @@ Each graph on this page is a visual representation of calculated MEASURES, provi
 #### Overview
 The Stores Map is a pivotal tool for regional managers, providing a comprehensive view of store performances across different regions. It is an essential component for strategic decision-making, offering insights into sales, customer activity, and target achievement.
 
-![Stores Map](path/to/stores_map_image.png)
+![Stores Map](/assets/report-pages/stores-map.PNG)
 
 #### Graphs
 The map visual takes up a central position on the page, complemented by a slicer for selecting specific countries. This setup provides a clear geographic view of sales, customer activity, and market penetration—crucial for regional managers in charge of strategic planning.
-
 
 <!-- <details>
 <summary>#### Graph Setup</summary> -->
@@ -577,7 +579,7 @@ The map visual takes up a central position on the page, complemented by a slicer
 #### Overview
 Transitioning from the broad geographic insights, the Stores Drill Through page allows regional managers to drill down into individual store to assess their performance against set targets.
 
-![Stores Drill Through](path/to/stores_drill_through_image.png)
+![Stores Drill Through](/assets/report-pages/drillthrough.PNG)
 
 #### Graphs
 This page houses a range of visuals: gauges for Profit and Revenue YTD against quarterly targets, a top products table, and a column chart showing orders by category, all of which provide a detailed breakdown of store operations.
@@ -598,7 +600,7 @@ This page houses a range of visuals: gauges for Profit and Revenue YTD against q
 #### Overview
 The Stores Tooltip page serves as a dynamic hover detail feature for the Stores Map, instantly presenting key information about each store without requiring page navigation.
 
-![Stores Tooltip](path/to/stores_tooltip_image.png) - Maybe use GIF
+![Stores Tooltip](/assets/report-pages/tooltip.PNG)
 
 #### Graphs
 Customized tooltips appear when hovering over a store on the map, showing a profit gauge or other relevant metrics, allowing for an immediate understanding of store performance.
@@ -749,27 +751,21 @@ To begin working with the Power BI template and sample datasets, follow these st
 3. **Opening the Project File**:
    - Launch Power BI Desktop and open the `.pbix` file from the repository to initiate the report exploration.
 
-## Usage Guidelines
+## Usage
 
 This project is designed to walk you through a structured approach to business intelligence reporting:
 
-1. **Data Loading**:
-   - Begin by importing the sales data from various sources into Power BI for consolidation.
+1. **Data Loading**: Begin by importing the sales data from various sources into Power BI for consolidation.
 
-2. **Data Transformation**:
-   - Leverage Power BI's Power Query Editor to cleanse, transform, and prepare your dataset for analysis.
+2. **Data Transformation**: Leverage Power BI's Power Query Editor to cleanse, transform, and prepare your dataset for analysis.
 
-3. **Data Modeling**:
-   - Employ the star-schema approach to construct an efficient data model, ensuring your tables are correctly related.
+3. **Data Modeling**: Employ the star-schema approach to construct an efficient data model, ensuring your tables are correctly related.
 
-4. **Data Visualization**:
-   - Utilize Power BI's array of visualization tools to bring your data to life, creating informative and interactive report pages.
+4. **Data Visualization**: Utilize Power BI's array of visualization tools to bring your data to life, creating informative and interactive report pages.
 
-5. **Report Pages Navigation**:
-   - Navigate through the report pages such as the Executive Summary, Product Detail, Stores Map, and others to analyze different aspects of business performance.
+5. **Report Pages Navigation**: Navigate through the report pages such as the Executive Summary, Product Detail, Stores Map, and others to analyze different aspects of business performance.
 
-6. **Advanced Features**:
-   - Explore advanced functionalities like drill-throughs and tooltips for a deeper understanding of specific data points.
+6. **Advanced Features**: Explore advanced functionalities like drill-throughs and tooltips for a deeper understanding of specific data points.
 
 Happy analyzing, and we look forward to seeing the insights you'll uncover!
 
