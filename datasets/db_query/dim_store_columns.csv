@@ -1,0 +1,14 @@
+name,type
+store_code,TEXT
+staff_numbers,BIGINT
+date_opened,TEXT
+store_type,TEXT
+country_code,TEXT
+region,TEXT
+country_region,TEXT
+lat,DOUBLE PRECISION
+long,DOUBLE PRECISION
+country,TEXT
+full_region,TEXT
+date_added,DATE
+sale_price,"NUMERIC(10, 2)"

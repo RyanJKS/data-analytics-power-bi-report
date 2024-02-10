@@ -1,0 +1,6 @@
+name,type
+dates,TEXT
+sale_price,DOUBLE PRECISION
+country,TEXT
+product_quantity,BIGINT
+cost_price,DOUBLE PRECISION

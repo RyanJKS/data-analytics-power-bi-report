@@ -1,0 +1,5 @@
+name,type
+store_type,TEXT
+order_count,BIGINT
+totalled_sales,DOUBLE PRECISION
+sales_percentage,DOUBLE PRECISION

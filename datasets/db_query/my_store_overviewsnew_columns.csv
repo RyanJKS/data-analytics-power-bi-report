@@ -1,0 +1,4 @@
+name,type
+order_date_uuid,TEXT
+total_sales_new,DOUBLE PRECISION
+store_type,TEXT

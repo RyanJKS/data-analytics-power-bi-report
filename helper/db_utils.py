@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.exc import SQLAlchemyError
 import os
 import pandas as pd
@@ -61,11 +61,11 @@ class RDSDatabaseConnector:
         """
         DATABASE_TYPE = 'postgresql'
         DBAPI = 'psycopg2'
-        USER = self.db_creds['RDS_USER']
-        PASSWORD = self.db_creds['RDS_PASSWORD']
-        ENDPOINT = self.db_creds['RDS_HOST']
-        PORT = self.db_creds['RDS_PORT']
-        DATABASE = self.db_creds['RDS_DATABASE']
+        USER = self.db_creds['USER']
+        PASSWORD = self.db_creds['PASSWORD']
+        ENDPOINT = self.db_creds['HOST']
+        PORT = self.db_creds['PORT']
+        DATABASE = self.db_creds['DATABASE']
 
         try:
             engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{ENDPOINT}:{PORT}/{DATABASE}")
@@ -74,24 +74,17 @@ class RDSDatabaseConnector:
             raise Exception(f"Error initializing database engine: {e}")
 
     
-    def extract_from_db(self, table_name: str) -> pd.DataFrame:
-        """
-        Extracts data from the specified table in the database into a DataFrame.
-
-        Args:
-            table_name (str): The name of the table from which to extract data.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the extracted data.
-        """        
-        try:
-            with self.engine.begin():
-                # Read the data and return it in datafram format
-                df = pd.read_sql_table(table_name, self.engine)
-                return df
-
-        except SQLAlchemyError as e:
-            raise Exception(f"An error occurred while extracting data: {e}")
+    def get_table_list(self) -> pd.DataFrame:
+        inspector = inspect(self.engine)
+        tables = inspector.get_table_names()
+        df = pd.DataFrame(tables, columns=['Table Name'])
+        return df
+    
+    def get_columns_list(self, table_name: str) -> pd.DataFrame:
+        inspector = inspect(self.engine)
+        columns = inspector.get_columns(table_name)
+        df = pd.DataFrame(columns)
+        return df[['name', 'type']]
     
     @staticmethod
     def save_to_csv(df: pd.DataFrame, path: str, file_name: str) -> None:

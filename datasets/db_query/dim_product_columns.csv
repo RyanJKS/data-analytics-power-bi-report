@@ -1,0 +1,13 @@
+name,type
+description,TEXT
+sale_price,DOUBLE PRECISION
+weight,TEXT
+category,TEXT
+EAN,DOUBLE PRECISION
+date_added,TEXT
+product_uuid,TEXT
+availability,TEXT
+product_code,TEXT
+cost_price,DOUBLE PRECISION
+country_code,VARCHAR(2)
+country_name,VARCHAR(50)

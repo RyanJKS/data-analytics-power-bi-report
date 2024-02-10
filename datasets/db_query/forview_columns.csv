@@ -1,0 +1,12 @@
+name,type
+country,TEXT
+full_region,TEXT
+store_type,TEXT
+product_quantity,BIGINT
+order_date,TEXT
+dates,TEXT
+month_name,TEXT
+sale_price,DOUBLE PRECISION
+cost_price,DOUBLE PRECISION
+category,TEXT
+percentage_of_sales,BIGINT

@@ -1,0 +1,11 @@
+name,type
+date,TEXT
+day,BIGINT
+day_of_week,TEXT
+month_name,TEXT
+quarter,BIGINT
+year,BIGINT
+start_of_year,TEXT
+start_of_monthj,TEXT
+start_of_quarter,TEXT
+start_of_week,TEXT

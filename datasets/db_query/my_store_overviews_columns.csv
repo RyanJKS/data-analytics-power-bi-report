@@ -1,0 +1,5 @@
+name,type
+order_date_uuid,TEXT
+product_quantity,BIGINT
+store_type,TEXT
+sale_price,DOUBLE PRECISION

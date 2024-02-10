@@ -1,0 +1,11 @@
+name,type
+first_name,TEXT
+last_name,TEXT
+date_of_birth,TEXT
+company,TEXT
+email,TEXT
+address,TEXT
+country,TEXT
+country_code,TEXT
+join_date,TEXT
+user_uuid,TEXT

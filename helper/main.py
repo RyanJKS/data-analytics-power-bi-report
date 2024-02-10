@@ -1,15 +1,18 @@
 from db_utils import RDSDatabaseConnector
 
 
-def get_finance():
-    finance_instance = RDSDatabaseConnector('db_creds/postgres_db_creds.yaml')
+def main():
+    db_instance = RDSDatabaseConnector('../db_creds/postgres_db_creds.yaml')
     
-    dataset = finance_instance.extract_from_db('loan_payments')
-    path_to_save_file = 'datasets/finance/'
-    file_name = 'Finance_Data.csv'
-    finance_instance.save_to_csv(dataset, path_to_save_file, file_name)
-    return None
+    tables = db_instance.get_table_list()
+    db_instance.save_to_csv(tables, '../datasets/db_query/', 'tables_list.csv')
     
+    for table in tables['Table Name']:
+        columns = db_instance.get_columns_list(table)
+        db_instance.save_to_csv(columns, '../datasets/db_query/', f'{table}_columns.csv')
+
+    print("Database tables and columns have been saved to CSV files.")
+
     
 if __name__ == "__main__":
-    print(get_finance())
+    main()

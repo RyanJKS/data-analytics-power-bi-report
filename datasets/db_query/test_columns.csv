@@ -1,0 +1,11 @@
+name,type
+order_date_uuid,TEXT
+user_id,TEXT
+card_number,BIGINT
+store_code,TEXT
+product_code,TEXT
+product_quantity,BIGINT
+ship_date_uuid,TEXT
+order_date,TEXT
+shipping_date,TEXT
+total_orders,BIGINT
