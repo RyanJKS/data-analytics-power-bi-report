@@ -16,7 +16,6 @@ The figure below shows the report's structure and the insights it encompasses:
 
 # Table of Contents
 1. [Project Overview](#project-overview)
-   - [Dashboard Overview](#comprehensive-dashboard-in-a-glance)
    - [Objectives](#objectives)
 2. [Data Loading and Preparation](#data-loading-and-preparation)
 3. [Data Modeling and Star Schema](#data-modeling-and-star-schema)
@@ -24,13 +23,13 @@ The figure below shows the report's structure and the insights it encompasses:
    - [Star Schema Relationships](#star-schema-development)
 4. [DAX Measures and Data Analysis](#dax-measures-and-analysis)
    - [Measures Table Creation](#establishing-a-measures-table)
-   - [In-Depth Reporting with DAX Measures](#comprehensive-dax-measures-for-in-depth-reporting)
-   - [Hierarchies and Data Model Enhancements](#analytical-hierarchies-and-data-model-enhancement)
-5. [Report Pages Deep Dive](#overview-of-report-pages)
+   - [In-Depth Reporting with DAX Measures](#dax-measures-and-analysis)
+   - [Hierarchies and Data Model Enhancements](#hierarchies-and-data-model-enhancement)
+5. [Report Pages Deep Dive](#report-pages-deep-dive)
    - [Executive Summary: High-Level Insights](#executive-summary-high-level-insights)
    - [Customer Detail: Segmentation and Behavior](#customer-detail-segmentation-and-behavior)
    - [Product Detail: Performance Exploration](#product-detail-performance-exploration)
-   - [Stores Map: Regional Performance at a Glance](#stores-map-regional-performance-at-a-glance)
+   - [Stores Map: Regional Performance](#stores-map-regional-performance)
    - [Stores Drill Through: In-Depth Store Analysis](#stores-drill-through-in-depth-store-analysis)
    - [Stores Tooltip: Instant Data on Hover](#stores-tooltip-instant-data-on-hover)
    - [Navigation Bar: Efficient Report Browsing](#navigation-bar-efficient-report-browsing)
@@ -323,7 +322,7 @@ The robust set of DAX measures shown below are foundational for our reporting ne
 
 > Note: All implementations were made whilst in the `Model View`
 
-### Analytical Hierarchies & Data Model Enhancement
+### Hierarchies and Data Model Enhancement
 
 This enhancement introduces Date and Geography hierarchies, significantly deepening the analysis capabilities of our reports. By implementing these hierarchies, users can perform granular analysis and filter data more effectively.
 
