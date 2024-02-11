@@ -410,7 +410,7 @@ Each visual element on the page is carefully constructed using MEASURES data to 
 > Note: This was achieved by using the `Edit Interactions` view in the `Format` tab of the ribbon.
 
 <details>
-<summary>### Graph Setup in PowerBI</summary>
+<summary>Graph Setup in PowerBI</summary>
 
 #### Constructing Card Visuals for Key Metrics
 - **Steps**: Assign MEASURES for Total Revenue, Total Profit, and Total Orders.
@@ -470,7 +470,7 @@ Each visual uses calculated MEASURES to present comprehensive data on customer i
    - `Total Customers by Country Donut Chart` does cross-filter `Total Customers by Category Bar Chart`
 
 <details>
-<summary>### Graph Setup in PowerBI</summary>
+<summary>Graph Setup in PowerBI</summary>
 
 #### Line Chart with Forecasts
 - **Configuration**: 
@@ -521,7 +521,7 @@ Each graph on this page is a visual representation of calculated MEASURES, provi
    - `Top 10 Products Table` does not affect any other visuals
 
 <details>
-<summary>### Graph Setup on PowerBI</summary>
+<summary>Graph Setup on PowerBI</summary>
 
 #### Gauge Visuals for Quarterly Metrics
 - **Steps**: Add a set of three gauges, showing the current-quarter performance of Orders, Revenue and Profit against a quarterly target. The CEO has told you that they are targeting 10% quarter-on-quarter growth in all three metrics.
@@ -559,7 +559,7 @@ The Stores Map is a pivotal tool for regional managers, providing a comprehensiv
 The map visual takes up a central position on the page, complemented by a slicer for selecting specific countries. This setup provides a clear geographic view of sales, customer activity, and market penetration—crucial for regional managers in charge of strategic planning.
 
 <details>
-<summary>#### Graph Setup on PowerBI</summary>
+<summary>Graph Setup on PowerBI</summary>
 
 #### Map Visual Configuration
 - **Steps**:
@@ -587,7 +587,7 @@ Transitioning from the broad geographic insights, the Stores Drill Through page 
 This page houses a range of visuals: gauges for Profit and Revenue YTD against quarterly targets, a top products table, and a column chart showing orders by category, all of which provide a detailed breakdown of store operations.
 
 <details>
-<summary>#### Graph Setup</summary>
+<summary>Graph Setup on PowerBI</summary>
 
 #### Page Configuration 
   - Define the page as a Drillthrough page within the Format Pane, setting 'Used as category' for a focused category drill-through, such as `Country Region`.
@@ -611,7 +611,7 @@ The Stores Tooltip page serves as a dynamic hover detail feature for the Stores 
 Customized tooltips appear when hovering over a store on the map, showing a profit gauge or other relevant metrics, allowing for an immediate understanding of store performance.
 
 <details>
-<summary>#### Graph Setup on PowerBI</summary>
+<summary>Graph Setup on PowerBI</summary>
 
 #### Tooltip Page Configuration
 - Set the page type to `Tooltip` and adjust the size to match the Tooltip canvas size in Power BI settings.
