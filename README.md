@@ -23,7 +23,7 @@ The figure below shows the report's structure and the insights it encompasses:
    - [Star Schema Relationships](#star-schema-development)
 4. [DAX Measures and Data Analysis](#dax-measures-and-analysis)
    - [Measures Table Creation](#establishing-a-measures-table)
-   - [In-Depth Reporting with DAX Measures](#dax-measures-and-analysis)
+   - [DAX Measures for In-depth Reporting](#dax-measures-and-analysis)
    - [Hierarchies and Data Model Enhancements](#hierarchies-and-data-model-enhancement)
 5. [Report Pages Deep Dive](#report-pages-deep-dive)
    - [Executive Summary: High-Level Insights](#executive-summary-high-level-insights)
@@ -214,8 +214,8 @@ The robust set of DAX measures shown below are foundational for our reporting ne
          TOTALQTD([Total Orders], DATEADD(Dates[Date], -1, QUARTER))
       )
       
-      Previous Quarter Revenue = CALCULATE(
-         TOTALQTD([Total Revenue], DATEADD(Dates[Date], -1, QUARTER))
+      Previous Quarter Profit = CALCULATE(
+         TOTALQTD([Total Profit], DATEADD(Dates[Date], -1, QUARTER))
       )
 
       Previous Quarter Revenue = CALCULATE(
